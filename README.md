@@ -9,12 +9,18 @@ Nginx is also installed and configured for Kibana.  Supervisord is used for Ngin
 After installing you can visit http://localhost to view the Kibana web interface.
 Fluentd will be running and accepting messages on port 24224.  You can then start posting messages to Fluentd and they will be saved in Elasticsearch.
 
+## References
+
+ - http://docs.fluentd.org/articles/install-by-deb
+ - https://www.digitalocean.com/community/tutorials/elasticsearch-fluentd-and-kibana-open-source-log-search-and-visualization
+
 ## Exposed ports
 
  - 80 Nginx http
  - 9200 Elasticsearch http
  - 9300 Elasticsearch transport
  - 24224 Fluentd
+ - 8888 Post logs using http
 
 Nginx is confirgured to proxy elastic search port 9200 to 80 which avoids some proxies blocking high ports.
 Kibana comes shipped with a config to use port 80 for elastic search so its ready to go.
@@ -32,13 +38,13 @@ Supervisord - Start Nginx, Elasticsearch, and Fluentd in the foreground with sup
 
 First step is to pull the image:
 
-    docker pull hbussell/docker-fluentd-kibana
+    docker build -t=defk .
 
 Run the image:
 
 Note you may want to change the volume -v parameter to set a different data directory used by Elasticsearch.
 
-    sudo docker run -p 9200:9200 -p 9300:9300 -p 24224:24224 -p 80:80 -v /data:/data  --name docker_fluentd_kibana_inst -i -t hbussell/docker-fluentd-kibana:docker-fluentd-kibana
+    sudo docker run -p 8888:8888 -p 9200:9200 -p 9300:9300 -p 24224:24224 -p 80:80 -v /data:/data  --name defk -i -t defk
 
 Running with systemd:
     
