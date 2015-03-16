@@ -52,4 +52,6 @@ Running with systemd:
  - `sudo systemctl enable /etc/systemd/system/systemd.fluentd-kibana.service`
  - `sudo systemctl start systemd.fluentd-kibana.service`
 
+## Posting Logs using curl
 
+    curl -X POST -d 'json={"json":"message"}' http://localhost:8888/elasticsearch
