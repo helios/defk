@@ -10,6 +10,8 @@ RUN \
   rm -f elasticsearch-1.4.4.tar.gz && \
   mv /tmp/elasticsearch-1.4.4 /elasticsearch
 
+ADD config/elasticsearch.yml /elasticsearch/config/elasticsearch.yml
+
 # Install Fluentd.
 RUN wget http://packages.treasuredata.com/2/ubuntu/trusty/pool/contrib/t/td-agent/td-agent_2.0.4-0_amd64.deb &&\
     dpkg -i td-agent_2.0.4-0_amd64.deb &&\
