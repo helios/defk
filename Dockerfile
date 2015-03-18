@@ -8,7 +8,9 @@ RUN \
   wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.4.4.tar.gz && \
   tar xvzf elasticsearch-1.4.4.tar.gz && \
   rm -f elasticsearch-1.4.4.tar.gz && \
-  mv /tmp/elasticsearch-1.4.4 /elasticsearch
+  mv /tmp/elasticsearch-1.4.4 /elasticsearch &&\
+  cd /elasticsearch  &&\
+  bin/plugin -i elasticsearch/marvel/latest
 
 ADD config/elasticsearch.yml /elasticsearch/config/elasticsearch.yml
 
@@ -18,6 +20,7 @@ RUN wget http://packages.treasuredata.com/2/ubuntu/trusty/pool/contrib/t/td-agen
     apt-get update &&\
     apt-get install make libcurl4-gnutls-dev --yes &&\
     /opt/td-agent/embedded/bin/fluent-gem install fluent-plugin-elasticsearch &&\
+    /opt/td-agent/embedded/bin/fluent-gem install fluent-plugin-mongo &&\
     /opt/td-agent/embedded/bin/fluent-gem install fluent-plugin-record-reformer
 
 ADD config/etc/td-agent/td-agent.conf /etc/td-agent/td-agent.conf
