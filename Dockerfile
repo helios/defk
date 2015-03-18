@@ -94,4 +94,4 @@ EXPOSE 80
 EXPOSE 443
 
 #docker build --tag helios/defk .
-#docker run -p 5601:5601 -p 9200:9200 -p 9300:9300 -p 24224:24224 -p 80:80 -p 8888:8888 --name defk --link mongo_log:mongo_log -v /mnt/cdata/db/IT/logs/elastic/log:/data/elastic/log -v /mnt/cdata/db/IT/logs/elastic/data:/data/elastic/data -i -t defk
+#docker run -p 5601:5601 -p 9200:9200 -p 9300:9300 -p 24224:24224 -p 80:80 -p 8888:8888 --name defk --link mongo_log:mongo_log -v /mnt/cdata/db/IT/logs/elastic/log:/data/elastic/log -v /mnt/cdata/db/IT/logs/elastic/data:/data/elastic/data -i -t helios/defk
